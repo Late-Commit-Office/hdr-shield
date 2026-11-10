@@ -1,27 +1,34 @@
 #!/bin/bash
-# Builds HDRClamp.swift into a universal (arm64 + x86_64) HDRClamp.app.
+# Builds Sources/*.swift into a universal (arm64 + x86_64) "HDR Shield.app".
 # Requires Xcode or the Command Line Tools. Usage: bash build.sh
 #
-# 把 HDRClamp.swift 编译并打包成通用二进制(arm64 + x86_64)的 HDRClamp.app。
+# 把 Sources/*.swift 编译并打包成通用二进制(arm64 + x86_64)的「HDR Shield.app」。
 # 需要 Xcode 或 Command Line Tools。用法:bash build.sh
 set -euo pipefail
 cd "$(dirname "$0")"
 
-APP="HDRClamp.app"
+APP_NAME="HDR Shield"          # Shown in Finder and the menu bar / Finder 和菜单中显示的名字
+EXECUTABLE="HDRShield"         # Binary name inside the bundle (no spaces) / 包内可执行文件名(无空格)
+BUNDLE_ID="local.hdrshield"
+APP="$APP_NAME.app"
 MIN_OS="13.0"
+VERSION="1.0"
+BUILD="1"
 
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 rm -rf "$APP"
-mkdir -p "$APP/Contents/MacOS"
+mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 
 # Compile once per architecture, then merge with lipo.
 # 每个架构各编译一次,再用 lipo 合并。
 for ARCH in arm64 x86_64; do
-    swiftc -O -target "$ARCH-apple-macos$MIN_OS" HDRClamp.swift -o "$TMP/HDRClamp-$ARCH"
+    swiftc -O -module-name "$EXECUTABLE" -target "$ARCH-apple-macos$MIN_OS" \
+        Sources/*.swift -o "$TMP/$EXECUTABLE-$ARCH"
 done
-lipo -create "$TMP/HDRClamp-arm64" "$TMP/HDRClamp-x86_64" -output "$APP/Contents/MacOS/HDRClamp"
+lipo -create "$TMP/$EXECUTABLE-arm64" "$TMP/$EXECUTABLE-x86_64" \
+    -output "$APP/Contents/MacOS/$EXECUTABLE"
 
 cat > "$APP/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -29,17 +36,19 @@ cat > "$APP/Contents/Info.plist" <<EOF
 <plist version="1.0">
 <dict>
     <key>CFBundleIdentifier</key>
-    <string>local.hdrclamp</string>
+    <string>$BUNDLE_ID</string>
     <key>CFBundleName</key>
-    <string>HDRClamp</string>
+    <string>$APP_NAME</string>
+    <key>CFBundleDisplayName</key>
+    <string>$APP_NAME</string>
     <key>CFBundleExecutable</key>
-    <string>HDRClamp</string>
+    <string>$EXECUTABLE</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
+    <string>$VERSION</string>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>$BUILD</string>
     <key>LSMinimumSystemVersion</key>
     <string>$MIN_OS</string>
     <key>LSUIElement</key>
@@ -52,4 +61,4 @@ EOF
 # 本地临时签名,登录项功能需要。
 codesign --force --sign - "$APP"
 
-echo "Built: $(pwd)/$APP ($(lipo -archs "$APP/Contents/MacOS/HDRClamp"))"
+echo "Built: $(pwd)/$APP ($(lipo -archs "$APP/Contents/MacOS/$EXECUTABLE"))"
