@@ -1,8 +1,8 @@
-// HDR Shield — a menu bar utility that toggles clamping of HDR highlights on the built-in display.
-// HDR Shield —— 菜单栏小工具，一键开关内建屏幕的“HDR 高光压制”。
+// HDR Shield — a menu bar utility that clamps HDR highlights on the displays you choose.
+// HDR Shield —— 菜单栏小工具，在你选择的显示器上压暗 HDR 高光。
 //
-// Left-click the icon to toggle; right-click (or Control-click) for the menu.
-// 左键点击图标切换开关；右键（或 Control+点击）打开菜单。
+// Left-click the icon for the menu; right-click (or Control-click) to turn shielding on or off.
+// 左键点击图标打开菜单；右键（或 Control+点击）开关遮光。
 //
 // How it works: installing a custom gamma table through the public CoreGraphics API makes
 // macOS clip HDR content to SDR white. The table is removed when the app quits.
@@ -12,6 +12,7 @@
 // Files / 文件:
 //   main.swift         app bootstrap / 启动入口
 //   AppDelegate.swift  status item, menu, toggling / 菜单栏图标、菜单、开关逻辑
+//   MenuRows.swift     menu rows with a switch or checkbox / 带开关或复选框的菜单行
 //   Displays.swift     display lookup and gamma tables / 查找显示器、套用色表
 //   Strings.swift      user-facing strings / 界面文字
 

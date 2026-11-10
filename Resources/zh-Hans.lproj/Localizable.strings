@@ -2,12 +2,23 @@
    键必须与 en.lproj 完全一致；可以用 `bash scripts/check-strings.sh` 检查。
    中文文字使用全角标点。 */
 
-/* 菜单顶部的状态行，也是提示文字的开头 */
+/* 菜单顶部开关下方的状态行，也是提示文字的第一行 */
 "status.on" = "HDR 高光：遮光中";
 "status.off" = "HDR 高光：正常";
+"status.noHDR" = "未连接 HDR 显示器";
+/* 连接了多台 HDR 显示器时的状态。%1$ld = 正在遮光的显示器数，%2$ld = HDR 显示器总数 */
+"status.on.count" = "HDR 高光：遮光中（%2$ld 台显示器中的 %1$ld 台）";
 
 /* 菜单栏图标的提示文字。%@ = 上面的某一条状态 */
-"tooltip.format" = "%@（点击切换，右键菜单）";
+"tooltip.on" = "%@\n右键点击即可关闭";
+"tooltip.off" = "%@\n右键点击即可打开";
+
+/* 显示器列表，连接了多台显示器时显示 */
+"menu.applyTo" = "应用于：";
+/* 顶部开关关闭时，显示在显示器列表下方 */
+"menu.offHint" = "已关闭：打开后按所选显示器生效";
+/* 不支持 HDR 的显示器，显示为灰色。%@ = 显示器名称 */
+"menu.sdrDisplay" = "%@（SDR）";
 
 /* 菜单项 */
 "menu.launchAtLogin" = "登录时启动";

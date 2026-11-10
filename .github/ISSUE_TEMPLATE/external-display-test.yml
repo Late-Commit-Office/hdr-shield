@@ -1,0 +1,80 @@
+name: External HDR display test
+description: Report whether HDR Shield works on your external HDR display (beta).
+title: "[External display] "
+labels: ["external-display"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing! Before filling this in:
+        1. Turn on **High Dynamic Range** for the display in System Settings → Displays.
+        2. In the HDR Shield menu, tick the display under **Apply to:** and play an HDR video on it. If you don't have one at hand, try [this HDR clip on Pexels](https://www.pexels.com/video/blooming-phlox-in-a-lush-outdoor-garden-34261113/).
+
+  - type: dropdown
+    id: result
+    attributes:
+      label: Were the HDR highlights shielded?
+      options:
+        - "Yes, highlights stayed at normal brightness"
+        - "Partly, they were dimmer but still brighter than normal"
+        - "No, nothing changed"
+        - "The display was greyed out as (SDR) in the menu"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: input
+    id: display
+    attributes:
+      label: Display model
+      placeholder: e.g. LG 27UQ850, Apple Pro Display XDR
+    validations:
+      required: true
+
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection
+      options:
+        - Thunderbolt / USB-C
+        - HDMI
+        - DisplayPort
+        - Through a dock or adapter
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: mac
+    attributes:
+      label: Mac model
+      placeholder: e.g. MacBook Pro 14-inch, M3 Pro, 2023
+    validations:
+      required: true
+
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: e.g. macOS 15.5
+    validations:
+      required: true
+
+  - type: dropdown
+    id: flicker
+    attributes:
+      label: When you unticked one display, did the other displays flicker?
+      options:
+        - "Yes"
+        - "No"
+        - "Didn't try"
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Screenshots, other apps that change display colours (BetterDisplay, f.lux…), or anything odd you noticed.
+    validations:
+      required: false

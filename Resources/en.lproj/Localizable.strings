@@ -1,12 +1,23 @@
 /* HDR Shield — English (base language).
    Every other language must have the same keys; `bash scripts/check-strings.sh` checks this. */
 
-/* Status line at the top of the menu, and the start of the tooltip */
+/* Status line under the switch at the top of the menu; also the first line of the tooltip */
 "status.on" = "HDR highlights: shielding";
 "status.off" = "HDR highlights: normal";
+"status.noHDR" = "No HDR display connected";
+/* Status when more than one HDR display is connected. %1$ld = displays being shielded, %2$ld = HDR displays */
+"status.on.count" = "HDR highlights: shielding (%1$ld of %2$ld displays)";
 
 /* Tooltip of the menu bar icon. %@ = one of the status lines above */
-"tooltip.format" = "%@ (click to toggle, right-click for menu)";
+"tooltip.on" = "%@\nRight-click to turn off";
+"tooltip.off" = "%@\nRight-click to turn on";
+
+/* Display list, shown when more than one display is connected */
+"menu.applyTo" = "Apply to:";
+/* Shown under the display list while the switch at the top is off */
+"menu.offHint" = "Off: your display choices apply when turned on";
+/* A display without HDR, shown greyed out. %@ = display name */
+"menu.sdrDisplay" = "%@ (SDR)";
 
 /* Menu items */
 "menu.launchAtLogin" = "Launch at Login";
