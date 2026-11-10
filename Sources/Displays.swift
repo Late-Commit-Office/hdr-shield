@@ -1,7 +1,7 @@
 import CoreGraphics
 
 /// Upper bound of the gamma table. If a 1:1 table (1.0) has no effect on your Mac, try 0.98.
-/// 色表上限。如果 1:1 的色表(1.0)在你的 Mac 上不起作用,改成 0.98 试试。
+/// 色表上限。如果 1:1 的色表（1.0）在你的 Mac 上不起作用，改成 0.98 试试。
 let clampLevel: Float = 1.0
 
 /// Installs and removes the clamping gamma table.
@@ -17,13 +17,13 @@ enum Displays {
     }
 
     /// Restores the default gamma tables (for all displays).
-    /// 恢复默认色表(对所有显示器生效)。
+    /// 恢复默认色表（对所有显示器生效）。
     static func restoreAll() {
         CGDisplayRestoreColorSyncSettings()
     }
 
     /// Finds the built-in display; external displays are left untouched.
-    /// 查找内建显示器;外接显示器不受影响。
+    /// 查找内建显示器；外接显示器不受影响。
     static func builtinDisplay() -> CGDirectDisplayID? {
         var ids = [CGDirectDisplayID](repeating: 0, count: 16)
         var count: UInt32 = 0

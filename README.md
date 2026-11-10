@@ -14,6 +14,10 @@ HDR Shield is a tiny macOS menu bar app that stops HDR content from blasting pas
 
 On MacBooks, HDR videos and photos are shown brighter than everything else on screen, and macOS has no switch to turn this off for the built-in display. That can be uncomfortable, especially in a dark room.
 
+### Why not
+
+HDR Shield clips HDR highlights instead of tone-mapping them. Bright areas lose their detail, so HDR videos and photos can look overexposed or washed out. If you'd rather keep the full HDR picture and live with the extra brightness, don't install HDR Shield.
+
 ### How it works
 
 HDR Shield installs a custom gamma table on the built-in display through the public CoreGraphics API (`CGSetDisplayTransferByTable`). While a custom table is active, macOS clips HDR content to SDR white. Turning HDR Shield off, or quitting it, restores the default table.
@@ -58,13 +62,14 @@ Sources/
   Displays.swift      display lookup and gamma tables
   Strings.swift       user-facing strings
 Resources/
-  AppIcon.png         1024×1024 app icon
+  AppIcon.png         app icon, 1024×1024 with the shape at 824×824
+                      and a transparent margin (macOS icon grid)
 build.sh              builds the universal app
 ```
 
 ### Limitations
 
-- HDR highlights are clipped, not tone-mapped, so detail in very bright areas is lost.
+- HDR highlights are clipped, not tone-mapped, so detail in very bright areas is lost (see [Why not](#why-not)).
 - Only the built-in display is affected.
 - Other apps that change gamma tables (for example BetterDisplay or f.lux) may conflict with it.
 - Turning clamping off restores the default gamma tables on all displays.
@@ -77,46 +82,50 @@ Turn off Launch at Login from the menu, quit the app, and delete `HDR Shield.app
 
 ## 简体中文
 
-HDR Shield 是一个很小的 macOS 菜单栏 app,用来阻止 HDR 内容在 MacBook 内建屏幕上超出正常亮度。点一下即可开关。
+HDR Shield 是一个很小的 macOS 菜单栏 app，用来阻止 HDR 内容在 MacBook 内建屏幕上超出正常亮度。点一下即可开关。
 
 ### 为什么需要它
 
-在 MacBook 上,HDR 视频和照片会比屏幕上的其他内容更亮,而 macOS 没有提供针对内建屏幕的关闭开关。这在暗处尤其刺眼。
+在 MacBook 上，HDR 视频和照片会比屏幕上的其他内容更亮，而 macOS 没有提供针对内建屏幕的关闭开关。这在暗处尤其刺眼。
+
+### 为什么不用它
+
+HDR Shield 是直接裁切 HDR 高光，而不是做色调映射。很亮的区域会丢失细节，HDR 视频和照片可能看起来像过曝、发白。如果你宁愿忍受额外的亮度，也想保留完整的 HDR 画面，那就不要安装 HDR Shield。
 
 ### 原理
 
-HDR Shield 通过公开的 CoreGraphics API(`CGSetDisplayTransferByTable`)给内建屏幕套用一张自定义色表(gamma table)。自定义色表生效期间,macOS 会把 HDR 内容裁切到 SDR 白。关闭 HDR Shield 或退出 app 后,色表恢复默认。
+HDR Shield 通过公开的 CoreGraphics API（`CGSetDisplayTransferByTable`）给内建屏幕套用一张自定义色表（gamma table）。自定义色表生效期间，macOS 会把 HDR 内容裁切到 SDR 白。关闭 HDR Shield 或退出 app 后，色表恢复默认。
 
 ### 系统要求
 
 - macOS 13 Ventura 或更高版本
-- 带内建屏幕的 Mac(Apple 芯片或 Intel)
+- 带内建屏幕的 Mac（Apple 芯片或 Intel）
 
 ### 安装
 
-**下载:** 从 Releases 页面下载 `HDR-Shield.zip`,解压后把 `HDR Shield.app` 移到「应用程序」文件夹。app 没有经过公证,第一次打开会被 macOS 拦截,用下面的命令移除隔离标记即可:
+**下载：** 从 Releases 页面下载 `HDR-Shield.zip`，解压后把 `HDR Shield.app` 移到「应用程序」文件夹。app 没有经过公证，第一次打开会被 macOS 拦截，用下面的命令移除隔离标记即可：
 
 ```bash
 xattr -dr com.apple.quarantine "/Applications/HDR Shield.app"
 ```
 
-**从源码构建:** 需要 Xcode 或 Command Line Tools。
+**从源码构建：** 需要 Xcode 或 Command Line Tools。
 
 ```bash
 bash build.sh
 ```
 
-当前文件夹下会生成通用二进制的 `HDR Shield.app`,把它移到「应用程序」文件夹。
+当前文件夹下会生成通用二进制的 `HDR Shield.app`，把它移到「应用程序」文件夹。
 
 ### 使用
 
-- **左键点击**菜单栏图标切换开关。实心墨镜表示 HDR 高光已压制,空心墨镜表示正常。
-- **右键点击**(或按住 Control 点击)图标打开菜单:登录时启动、退出。
-- app 会记住上次的状态,第一次启动默认开启压制。
+- **左键点击**菜单栏图标切换开关。实心墨镜表示 HDR 高光已压制，空心墨镜表示正常。
+- **右键点击**（或按住 Control 点击）图标打开菜单：登录时启动、退出。
+- app 会记住上次的状态，第一次启动默认开启压制。
 
 ### 配置
 
-如果压制在你的 Mac 上不起作用,把 `Sources/Displays.swift` 顶部的 `clampLevel` 从 `1.0` 改成 `0.98` 后重新构建。整个屏幕会略微变暗一点。
+如果压制在你的 Mac 上不起作用，把 `Sources/Displays.swift` 顶部的 `clampLevel` 从 `1.0` 改成 `0.98` 后重新构建。整个屏幕会略微变暗一点。
 
 ### 项目结构
 
@@ -127,17 +136,18 @@ Sources/
   Displays.swift      查找显示器、套用色表
   Strings.swift       界面文字
 Resources/
-  AppIcon.png         1024×1024 app 图标
+  AppIcon.png         app 图标，1024×1024，图形 824×824，四周留透明边距
+                      （macOS 图标网格）
 build.sh              构建通用二进制 app
 ```
 
 ### 局限
 
-- HDR 高光是被直接裁切,而不是色调映射,所以很亮的区域会丢失细节。
+- HDR 高光是被直接裁切，而不是色调映射，所以很亮的区域会丢失细节（见[为什么不用它](#为什么不用它)）。
 - 只影响内建屏幕。
-- 其他会修改色表的 app(例如 BetterDisplay、f.lux)可能与它冲突。
-- 关闭压制时,会恢复所有显示器的默认色表。
+- 其他会修改色表的 app（例如 BetterDisplay、f.lux）可能与它冲突。
+- 关闭压制时，会恢复所有显示器的默认色表。
 
 ### 卸载
 
-在菜单里关闭「登录时启动」,退出 app,然后删除 `HDR Shield.app`。
+在菜单里关闭「登录时启动」，退出 app，然后删除 `HDR Shield.app`。

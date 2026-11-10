@@ -30,6 +30,24 @@ done
 lipo -create "$TMP/$EXECUTABLE-arm64" "$TMP/$EXECUTABLE-x86_64" \
     -output "$APP/Contents/MacOS/$EXECUTABLE"
 
+# App icon: turn Resources/AppIcon.png (1024×1024) into AppIcon.icns. Skipped if the PNG is missing.
+# app 图标:把 Resources/AppIcon.png(1024×1024)转换成 AppIcon.icns。没有这个 PNG 时跳过。
+ICON_SRC="Resources/AppIcon.png"
+ICON_PLIST=""
+if [[ -f "$ICON_SRC" ]]; then
+    ICONSET="$TMP/AppIcon.iconset"
+    mkdir -p "$ICONSET"
+    for SIZE in 16 32 128 256 512; do
+        sips -z "$SIZE" "$SIZE" "$ICON_SRC" --out "$ICONSET/icon_${SIZE}x${SIZE}.png" >/dev/null
+        sips -z "$((SIZE * 2))" "$((SIZE * 2))" "$ICON_SRC" --out "$ICONSET/icon_${SIZE}x${SIZE}@2x.png" >/dev/null
+    done
+    iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/AppIcon.icns"
+    ICON_PLIST="<key>CFBundleIconFile</key>
+    <string>AppIcon</string>"
+else
+    echo "warning: $ICON_SRC not found, building without an app icon" >&2
+fi
+
 cat > "$APP/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -53,6 +71,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
     <string>$MIN_OS</string>
     <key>LSUIElement</key>
     <true/>
+    $ICON_PLIST
 </dict>
 </plist>
 EOF
