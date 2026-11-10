@@ -1,0 +1,17 @@
+/* HDR Shield — English (base language).
+   Every other language must have the same keys; `bash scripts/check-strings.sh` checks this. */
+
+/* Status line at the top of the menu, and the start of the tooltip */
+"status.on" = "HDR highlights: shielding";
+"status.off" = "HDR highlights: normal";
+
+/* Tooltip of the menu bar icon. %@ = one of the status lines above */
+"tooltip.format" = "%@ (click to toggle, right-click for menu)";
+
+/* Menu items */
+"menu.launchAtLogin" = "Launch at Login";
+"menu.quit" = "Quit HDR Shield";
+
+/* Alert shown when the login item can't be changed. The system's error text is added below the message */
+"loginItem.error.title" = "Could not change the login item";
+"loginItem.error.message" = "Move HDR Shield.app to the Applications folder and try again.";

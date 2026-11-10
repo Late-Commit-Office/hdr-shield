@@ -45,9 +45,9 @@ This produces a universal `HDR Shield.app` in the current folder. Move it to the
 
 ### Usage
 
-- **Left-click** the menu bar icon to toggle. Filled sunglasses mean HDR highlights are clamped; outline sunglasses mean normal behavior.
+- **Left-click** the menu bar icon to toggle. Filled sunglasses mean HDR Shield is shielding HDR highlights; outline sunglasses mean normal behavior.
 - **Right-click** (or Control-click) the icon for the menu: Launch at Login and Quit.
-- The app remembers its last state. Clamping is on at first launch.
+- The app remembers its last state. Shielding is on at first launch.
 
 ### Configuration
 
@@ -60,19 +60,33 @@ Sources/
   main.swift          app bootstrap
   AppDelegate.swift   status item, menu, toggling
   Displays.swift      display lookup and gamma tables
-  Strings.swift       user-facing strings
+  Strings.swift       keys of the user-facing strings
 Resources/
   AppIcon.png         app icon, 1024×1024 with the shape at 824×824
                       and a transparent margin (macOS icon grid)
+  en.lproj/           English strings (base language)
+  zh-Hans.lproj/      Simplified Chinese strings
+scripts/
+  check-strings.sh    checks that every language has the same keys
 build.sh              builds the universal app
 ```
+
+### Languages
+
+HDR Shield is available in English and Simplified Chinese. It follows your macOS language, including the per-app setting in System Settings → General → Language & Region, and falls back to English.
+
+To add a language:
+
+1. Copy `Resources/en.lproj` to `Resources/<code>.lproj`, for example `zh-Hant.lproj` or `ja.lproj`.
+2. Translate the values (the text on the right of `=`) in both `.strings` files. Keep the keys and any `%@` as they are.
+3. Run `bash scripts/check-strings.sh`, then `bash build.sh`. The build fails if a language is missing keys or has extra ones.
 
 ### Limitations
 
 - HDR highlights are clipped, not tone-mapped, so detail in very bright areas is lost (see [Why not](#why-not)).
 - Only the built-in display is affected.
 - Other apps that change gamma tables (for example BetterDisplay or f.lux) may conflict with it.
-- Turning clamping off restores the default gamma tables on all displays.
+- Turning HDR Shield off restores the default gamma tables on all displays.
 
 ### Uninstall
 
@@ -119,9 +133,9 @@ bash build.sh
 
 ### 使用
 
-- **左键点击**菜单栏图标切换开关。实心墨镜表示 HDR 高光已压制，空心墨镜表示正常。
+- **左键点击**菜单栏图标切换开关。实心墨镜表示 HDR 高光遮光中，空心墨镜表示正常。
 - **右键点击**（或按住 Control 点击）图标打开菜单：登录时启动、退出。
-- app 会记住上次的状态，第一次启动默认开启压制。
+- app 会记住上次的状态，第一次启动默认开启遮光。
 
 ### 配置
 
@@ -134,19 +148,33 @@ Sources/
   main.swift          启动入口
   AppDelegate.swift   菜单栏图标、菜单、开关逻辑
   Displays.swift      查找显示器、套用色表
-  Strings.swift       界面文字
+  Strings.swift       界面文字的键
 Resources/
   AppIcon.png         app 图标，1024×1024，图形 824×824，四周留透明边距
                       （macOS 图标网格）
+  en.lproj/           英文文字（基础语言）
+  zh-Hans.lproj/      简体中文文字
+scripts/
+  check-strings.sh    检查每种语言的键是否一致
 build.sh              构建通用二进制 app
 ```
+
+### 语言
+
+HDR Shield 支持英文和简体中文。它跟随 macOS 的语言设置（包括「系统设置 → 通用 → 语言与地区」里针对单个 app 的设置），找不到对应语言时使用英文。
+
+添加一种语言：
+
+1. 把 `Resources/en.lproj` 复制为 `Resources/<代码>.lproj`，例如 `zh-Hant.lproj` 或 `ja.lproj`。
+2. 翻译两个 `.strings` 文件里的值（`=` 右边的文字）。键和 `%@` 保持不变。
+3. 运行 `bash scripts/check-strings.sh`，再运行 `bash build.sh`。如果某种语言缺少键或多出键，构建会失败。
 
 ### 局限
 
 - HDR 高光是被直接裁切，而不是色调映射，所以很亮的区域会丢失细节（见[为什么不用它](#为什么不用它)）。
 - 只影响内建屏幕。
 - 其他会修改色表的 app（例如 BetterDisplay、f.lux）可能与它冲突。
-- 关闭压制时，会恢复所有显示器的默认色表。
+- 关闭 HDR Shield 时，会恢复所有显示器的默认色表。
 
 ### 卸载
 

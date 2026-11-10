@@ -15,6 +15,10 @@ MIN_OS="13.0"
 VERSION="1.0"
 BUILD="1"
 
+# Check the translations before building.
+# 构建前先检查翻译。
+bash scripts/check-strings.sh
+
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
@@ -48,11 +52,17 @@ else
     echo "warning: $ICON_SRC not found, building without an app icon" >&2
 fi
 
+# Translations: copy every Resources/<lang>.lproj folder into the app.
+# 翻译：把 Resources/<lang>.lproj 文件夹全部复制到 app 里。
+cp -R Resources/*.lproj "$APP/Contents/Resources/"
+
 cat > "$APP/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
     <key>CFBundleIdentifier</key>
     <string>$BUNDLE_ID</string>
     <key>CFBundleName</key>

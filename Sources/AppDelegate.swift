@@ -60,17 +60,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Menu bar / 菜单栏
 
     private var statusText: String {
-        clamped ? L("HDR highlights: clamped", "HDR 高光：已压制")
-                : L("HDR highlights: normal", "HDR 高光：正常")
+        clamped ? Strings.statusOn : Strings.statusOff
     }
 
     private func updateIcon() {
-        // Filled sunglasses = clamped, outline sunglasses = normal.
-        // 实心墨镜 = 已压制，空心墨镜 = 正常。
+        // Filled sunglasses = shielding, outline sunglasses = normal.
+        // 实心墨镜 = 遮光中，空心墨镜 = 正常。
         let symbol = clamped ? "sunglasses.fill" : "sunglasses"
         statusItem.button?.image = NSImage(systemSymbolName: symbol, accessibilityDescription: statusText)
-        statusItem.button?.toolTip = statusText
-            + L(" (click to toggle, right-click for menu)", "（点击切换，右键菜单）")
+        statusItem.button?.toolTip = Strings.tooltip(status: statusText)
     }
 
     @objc private func clicked() {
@@ -90,13 +88,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(status)
         menu.addItem(.separator())
 
-        let login = NSMenuItem(title: L("Launch at Login", "登录时启动"),
+        let login = NSMenuItem(title: Strings.launchAtLogin,
                                action: #selector(toggleLoginItem), keyEquivalent: "")
         login.target = self
         login.state = SMAppService.mainApp.status == .enabled ? .on : .off
         menu.addItem(login)
 
-        let quit = NSMenuItem(title: L("Quit HDR Shield", "退出 HDR Shield"),
+        let quit = NSMenuItem(title: Strings.quit,
                               action: #selector(NSApplication.terminate(_:)), keyEquivalent: "")
         menu.addItem(quit)
 
@@ -116,10 +114,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         } catch {
             let alert = NSAlert()
-            alert.messageText = L("Could not change the login item", "无法更改登录项")
-            alert.informativeText = L(
-                "Move HDR Shield.app to the Applications folder and try again.",
-                "请先把 HDR Shield.app 移到「应用程序」文件夹再试。")
+            alert.messageText = Strings.loginItemErrorTitle
+            alert.informativeText = Strings.loginItemErrorMessage
                 + "\n\n\(error.localizedDescription)"
             NSApp.activate(ignoringOtherApps: true)
             alert.runModal()

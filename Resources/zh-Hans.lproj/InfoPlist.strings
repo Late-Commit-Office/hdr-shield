@@ -1,0 +1,3 @@
+/* macOS 显示的 app 名称（菜单栏、访达、登录项）。名称不翻译。 */
+"CFBundleName" = "HDR Shield";
+"CFBundleDisplayName" = "HDR Shield";
