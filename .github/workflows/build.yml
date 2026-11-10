@@ -19,7 +19,7 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build universal app
         run: bash build.sh
@@ -33,7 +33,7 @@ jobs:
       - name: Package
         run: ditto -c -k --keepParent "HDR Shield.app" HDR-Shield.zip
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: HDR-Shield
           path: HDR-Shield.zip

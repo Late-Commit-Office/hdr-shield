@@ -8,7 +8,7 @@ body:
       value: |
         感谢帮忙测试！填写之前：
         1. 在「系统设置 → 显示器」里为这台显示器开启 **高动态范围**。
-        2. 在 HDR Shield 菜单的 **应用于：** 下面勾选这台显示器，然后在它上面播放一段 HDR 视频。手头没有的话，可以试试 [Pexels 上的这段 HDR 视频](https://www.pexels.com/video/blooming-phlox-in-a-lush-outdoor-garden-34261113/)。
+        2. 在 HDR Shield 菜单的 **应用于：** 下面勾选这台显示器，然后在它上面播放一段 HDR 视频。手头没有的话，可以试试 [Pexels 上的这段 HDR 视频](https://www.pexels.com/video/blooming-phlox-in-a-lush-outdoor-garden-34261113/)。可能需要下载后才能看到 HDR 效果；最小的尺寸（360×640）就够用，下载无需注册或付费。
 
   - type: dropdown
     id: result

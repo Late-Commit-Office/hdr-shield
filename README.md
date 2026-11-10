@@ -2,7 +2,7 @@
 >
 > **声明:** 本仓库的代码由 LLM(Claude)编写,使用前请自行审阅。
 
-<h1><img src="Resources/AppIcon.png" width="128" height="128" alt="" align="center"> HDR Shield</h1>
+<h1><img src="Resources/AppIcon.png" width="64" height="64" alt="" align="center"> HDR Shield</h1>
 
 [English](#english) | [简体中文](#简体中文)
 
@@ -30,7 +30,15 @@ HDR Shield installs a custom gamma table on each display it covers through the p
 
 ### Install
 
-**Download:** get `HDR-Shield.zip` from the Releases page, unzip it, and move `HDR Shield.app` to the Applications folder. The app is not notarized, so macOS will block it the first time. Remove the quarantine flag to allow it:
+**Download:**
+
+1. Get `HDR-Shield.zip` from the Releases page, unzip it, and move `HDR Shield.app` to the Applications folder.
+2. Open the app. HDR Shield isn't notarized by Apple, so macOS blocks it the first time and says it can't verify the app. Click **Done**.
+3. Open **System Settings → Privacy & Security** and scroll down to the Security section. Next to the message that HDR Shield was blocked, click **Open Anyway**, then confirm with your password or Touch ID.
+
+You only need to do this once. On macOS 14 Sonoma or earlier, you can instead Control-click the app in Finder, choose **Open**, then click **Open** again.
+
+If you prefer Terminal, this command does the same in one step:
 
 ```bash
 xattr -dr com.apple.quarantine "/Applications/HDR Shield.app"
@@ -132,7 +140,15 @@ HDR Shield 通过公开的 CoreGraphics API（`CGSetDisplayTransferByTable`）�
 
 ### 安装
 
-**下载：** 从 Releases 页面下载 `HDR-Shield.zip`，解压后把 `HDR Shield.app` 移到「应用程序」文件夹。app 没有经过公证，第一次打开会被 macOS 拦截，用下面的命令移除隔离标记即可：
+**下载：**
+
+1. 从 Releases 页面下载 `HDR-Shield.zip`，解压后把 `HDR Shield.app` 移到「应用程序」文件夹。
+2. 打开 app。HDR Shield 没有经过 Apple 公证，第一次打开会被 macOS 拦截，提示无法验证这个 app。点击 **完成**。
+3. 打开 **系统设置 → 隐私与安全性**，向下滚动到「安全性」部分。在提示 HDR Shield 已被阻止的信息旁边，点击 **仍要打开**，然后输入密码或用触控 ID 确认。
+
+这一步只需要做一次。在 macOS 14 Sonoma 或更早的版本上，也可以在访达里按住 Control 点击这个 app，选择 **打开**，再点击一次 **打开**。
+
+如果你习惯用终端，下面的命令可以一步完成同样的事：
 
 ```bash
 xattr -dr com.apple.quarantine "/Applications/HDR Shield.app"
@@ -151,7 +167,7 @@ bash build.sh
 - **点击**菜单栏图标打开菜单。顶部的开关可以一次打开或关闭所有选中显示器的遮光。
 - **右键点击**（或按住 Control 点击）图标，不打开菜单直接开关遮光。
 - 实心墨镜表示至少有一台显示器在遮光，空心墨镜表示没有。
-- **多台显示器（测试阶段）：**菜单会在「应用于：」下面列出所有显示器。勾选要遮光的显示器即可，勾选时菜单不会关闭。内建屏幕默认勾选，外接显示器默认不勾选。
+- **多台显示器（测试阶段）：** 菜单会在「应用于：」下面列出所有显示器。勾选要遮光的显示器即可，勾选时菜单不会关闭。内建屏幕默认勾选，外接显示器默认不勾选。
 - 不支持 HDR 的显示器显示为灰色。外接 HDR 显示器只有在「系统设置 → 显示器」里开启了「高动态范围」时才算 HDR 显示器。用作显示器的 iPad 和 iPhone（随航或隔空播放）即使屏幕支持 HDR，也会显示为 SDR。
 - app 会记住开关状态和你对每台显示器的选择，第一次启动默认开启遮光。
 
