@@ -101,8 +101,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func updateIcon() {
         // Small sun = clamped, filled sun = normal.
-        // 小太阳 = 已压制,实心太阳 = 正常。
-        let symbol = clamped ? "sun.min" : "sun.max.fill"
+        // filled sunglasses = clamped, sunglasses = normal
+        // 墨镜 = 已压制, 透明眼镜 = 正常。
+        let symbol = clamped ? "sunglasses.fill" : "sunglasses"
         statusItem.button?.image = NSImage(systemSymbolName: symbol, accessibilityDescription: statusText)
         statusItem.button?.toolTip = statusText
             + L(" (click to toggle, right-click for menu)", "(点击切换,右键菜单)")
