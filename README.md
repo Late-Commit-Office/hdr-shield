@@ -107,7 +107,7 @@ To add a language:
 Multi-display support is in beta. It has only been tested on the built-in display, because we don't have an external HDR display to try it on. If you have one, please help:
 
 1. Turn on High Dynamic Range for the display in System Settings → Displays.
-2. In the HDR Shield menu, tick the display under "Apply to:" and play an HDR video on it. If you don't have one at hand, try [this HDR clip on Pexels](https://www.pexels.com/video/blooming-phlox-in-a-lush-outdoor-garden-34261113/).
+2. In the HDR Shield menu, tick the display under "Apply to:" and play an HDR video on it. If you don't have one at hand, try [this HDR clip on Pexels](https://www.pexels.com/video/blooming-phlox-in-a-lush-outdoor-garden-34261113/). You may need to download it to see it in HDR; the smallest size (360×640) is enough, and downloading needs no sign-up or payment.
 3. [Send a test report](../../issues/new?template=external-display-test.yml). The form asks whether the highlights were shielded, the display model, how it's connected, your Mac model and macOS version, and whether the other displays flickered when you unticked one.
 
 ### Uninstall
@@ -167,7 +167,7 @@ bash build.sh
 - **点击**菜单栏图标打开菜单。顶部的开关可以一次打开或关闭所有选中显示器的遮光。
 - **右键点击**（或按住 Control 点击）图标，不打开菜单直接开关遮光。
 - 实心墨镜表示至少有一台显示器在遮光，空心墨镜表示没有。
-- **多台显示器（测试阶段）：** 菜单会在「应用于：」下面列出所有显示器。勾选要遮光的显示器即可，勾选时菜单不会关闭。内建屏幕默认勾选，外接显示器默认不勾选。
+- **多台显示器（测试阶段）：**菜单会在「应用于：」下面列出所有显示器。勾选要遮光的显示器即可，勾选时菜单不会关闭。内建屏幕默认勾选，外接显示器默认不勾选。
 - 不支持 HDR 的显示器显示为灰色。外接 HDR 显示器只有在「系统设置 → 显示器」里开启了「高动态范围」时才算 HDR 显示器。用作显示器的 iPad 和 iPhone（随航或隔空播放）即使屏幕支持 HDR，也会显示为 SDR。
 - app 会记住开关状态和你对每台显示器的选择，第一次启动默认开启遮光。
 
@@ -217,7 +217,7 @@ HDR Shield 支持英文和简体中文。它跟随 macOS 的语言设置（包�
 多显示器支持还处于测试阶段。因为手头没有外接 HDR 显示器，目前只在内建屏幕上测试过。如果你有外接 HDR 显示器，欢迎帮忙测试：
 
 1. 在「系统设置 → 显示器」里为这台显示器开启「高动态范围」。
-2. 在 HDR Shield 菜单的「应用于：」下面勾选这台显示器，然后在它上面播放一段 HDR 视频。手头没有的话，可以试试 [Pexels 上的这段 HDR 视频](https://www.pexels.com/video/blooming-phlox-in-a-lush-outdoor-garden-34261113/)。
+2. 在 HDR Shield 菜单的「应用于：」下面勾选这台显示器，然后在它上面播放一段 HDR 视频。手头没有的话，可以试试 [Pexels 上的这段 HDR 视频](https://www.pexels.com/video/blooming-phlox-in-a-lush-outdoor-garden-34261113/)。可能需要下载后才能看到 HDR 效果；最小的尺寸（360×640）就够用，下载无需注册或付费。
 3. [提交测试报告](../../issues/new?template=external-display-test-zh-hans.yml)。表单会询问高光是否被压暗、显示器型号、连接方式、Mac 型号和 macOS 版本，以及取消勾选某台显示器时其他显示器有没有闪一下。
 
 ### 卸载
