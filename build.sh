@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 
 APP_NAME="HDR Shield"          # Shown in Finder and the menu bar / Finder 和菜单中显示的名字
 EXECUTABLE="HDRShield"         # Binary name inside the bundle (no spaces) / 包内可执行文件名(无空格)
-BUNDLE_ID="local.hdrshield"
+BUNDLE_ID="com.latecommitoffice.hdrshield"
 APP="$APP_NAME.app"
 MIN_OS="13.0"
 VERSION="1.0"

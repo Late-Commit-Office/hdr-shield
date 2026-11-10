@@ -7,9 +7,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var clamped = false
 
     private static let clampedKey = "clamped"
-    /// Bundle ID used before the rename; its saved state is migrated once.
-    /// 改名前使用的 bundle ID；其中保存的状态会迁移一次。
-    private static let legacyBundleID = "local.hdrclamp"
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -28,21 +25,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self, selector: #selector(reapply),
             name: NSWorkspace.didWakeNotification, object: nil)
 
-        setClamped(savedState())
-    }
-
-    /// Restores the last state; clamping is on by default at first launch.
-    /// Falls back to the state saved by HDRClamp (the old name) if there is one.
-    /// 恢复上次的状态；第一次启动默认开启压制。如果有旧名 HDRClamp 保存的状态，则沿用它。
-    private func savedState() -> Bool {
-        if let saved = UserDefaults.standard.object(forKey: Self.clampedKey) as? Bool {
-            return saved
-        }
-        if let legacy = UserDefaults(suiteName: Self.legacyBundleID)?
-            .object(forKey: Self.clampedKey) as? Bool {
-            return legacy
-        }
-        return true
+        // Restore the last state; clamping is on by default at first launch.
+        // 恢复上次的状态；第一次启动默认开启压制。
+        let saved = UserDefaults.standard.object(forKey: Self.clampedKey) as? Bool ?? true
+        setClamped(saved)
     }
 
     // MARK: - Toggle / 开关
