@@ -1,0 +1,48 @@
+# Place this file at .github/workflows/build.yml
+# 把本文件放到 .github/workflows/build.yml
+#
+# Builds a universal HDRClamp.app on every push and pull request.
+# Pushing a tag like v1.0 also publishes a GitHub release with the zipped app.
+# 每次 push 和 pull request 都会构建通用二进制的 HDRClamp.app。
+# 推送形如 v1.0 的 tag 时,还会发布带有 zip 包的 GitHub release。
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build universal app
+        run: bash build.sh
+
+      - name: Verify architectures
+        run: |
+          archs="$(lipo -archs HDRClamp.app/Contents/MacOS/HDRClamp)"
+          echo "Architectures: $archs"
+          [[ "$archs" == *arm64* && "$archs" == *x86_64* ]]
+
+      - name: Package
+        run: ditto -c -k --keepParent HDRClamp.app HDRClamp.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HDRClamp
+          path: HDRClamp.zip
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" HDRClamp.zip --title "$GITHUB_REF_NAME" --generate-notes
