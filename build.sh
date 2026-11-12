@@ -12,8 +12,8 @@ EXECUTABLE="HDRShield"         # Binary name inside the bundle (no spaces) / 包
 BUNDLE_ID="com.latecommitoffice.hdrshield"
 APP="$APP_NAME.app"
 MIN_OS="13.0"
-VERSION="0.1.0"
-BUILD="1"
+VERSION="0.1.1"
+BUILD="2"
 
 # Check the translations before building.
 # 构建前先检查翻译。
