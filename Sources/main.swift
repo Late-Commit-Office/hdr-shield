@@ -13,6 +13,7 @@
 //   main.swift         app bootstrap / 启动入口
 //   AppDelegate.swift  status item, menu, toggling / 菜单栏图标、菜单、开关逻辑
 //   MenuRows.swift     menu rows with a switch or checkbox / 带开关或复选框的菜单行
+//   MenuBarIcon.swift  loads the sunglasses menu bar icon / 加载菜单栏墨镜图标
 //   Displays.swift     display lookup and gamma tables / 查找显示器、套用色表
 //   Strings.swift      user-facing strings / 界面文字
 

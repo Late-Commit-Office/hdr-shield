@@ -56,6 +56,10 @@ fi
 # 翻译：把 Resources/<lang>.lproj 文件夹全部复制到 app 里。
 cp -R Resources/*.lproj "$APP/Contents/Resources/"
 
+# Menu bar icons (vector PDFs, see Sources/MenuBarIcon.swift).
+# 菜单栏图标（矢量 PDF，见 Sources/MenuBarIcon.swift）。
+cp Resources/MenuBarOn.pdf Resources/MenuBarOff.pdf "$APP/Contents/Resources/"
+
 cat > "$APP/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

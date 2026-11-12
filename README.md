@@ -2,7 +2,7 @@
 >
 > **声明:** 本仓库的代码由 LLM(Claude)编写,使用前请自行审阅。
 
-<h1><img src="Resources/AppIcon.png" width="64" height="64" alt="" align="center"> HDR Shield</h1>
+<h1><img src="Resources/AppIcon.png" width="128" height="128" alt="" align="center"> HDR Shield</h1>
 
 [English](#english) | [简体中文](#简体中文)
 
@@ -72,6 +72,7 @@ Sources/
   main.swift          app bootstrap
   AppDelegate.swift   status item, menu, toggling
   MenuRows.swift      menu rows with a switch or checkbox
+  MenuBarIcon.swift   loads the sunglasses menu bar icon
   Displays.swift      display lookup and gamma tables
   Strings.swift       keys of the user-facing strings
 Resources/
@@ -79,6 +80,9 @@ Resources/
                       and a transparent margin (macOS icon grid)
   en.lproj/           English strings (base language)
   zh-Hans.lproj/      Simplified Chinese strings
+  MenuBarOn.pdf       menu bar icons (filled = shielding, outline = off),
+  MenuBarOff.pdf      public-domain (CC0) SVGs converted to PDF with
+  MenuBar*.svg        `rsvg-convert -f pdf` (brew install librsvg)
 scripts/
   check-strings.sh    checks that every language has the same keys
 build.sh              builds the universal app
@@ -182,6 +186,7 @@ Sources/
   main.swift          启动入口
   AppDelegate.swift   菜单栏图标、菜单、开关逻辑
   MenuRows.swift      带开关或复选框的菜单行
+  MenuBarIcon.swift   加载菜单栏墨镜图标
   Displays.swift      查找显示器、套用色表
   Strings.swift       界面文字的键
 Resources/
@@ -189,6 +194,9 @@ Resources/
                       （macOS 图标网格）
   en.lproj/           英文文字（基础语言）
   zh-Hans.lproj/      简体中文文字
+  MenuBarOn.pdf       菜单栏图标（实心 = 遮光中，空心 = 关闭），
+  MenuBarOff.pdf      公有领域（CC0）的 SVG，用 `rsvg-convert -f pdf`
+  MenuBar*.svg        转换为 PDF（brew install librsvg）
 scripts/
   check-strings.sh    检查每种语言的键是否一致
 build.sh              构建通用二进制 app

@@ -136,9 +136,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func updateIcon() {
         // Filled sunglasses = shielding at least one display, outline sunglasses = not shielding.
+        // Bundled PDFs rather than system symbols, because "sunglasses" needs macOS 14.
         // 实心墨镜 = 至少有一台显示器在遮光，空心墨镜 = 没有遮光。
-        let symbol = shielded.isEmpty ? "sunglasses" : "sunglasses.fill"
-        statusItem.button?.image = NSImage(systemSymbolName: symbol, accessibilityDescription: statusText)
+        // 使用打包的 PDF 而不是系统符号，因为「sunglasses」符号需要 macOS 14。
+        let image = MenuBarIcon.image(filled: !shielded.isEmpty)
+        image?.accessibilityDescription = statusText
+        statusItem.button?.image = image
         statusItem.button?.toolTip = shieldOn
             ? Strings.tooltipOn(status: statusText)
             : Strings.tooltipOff(status: statusText)
