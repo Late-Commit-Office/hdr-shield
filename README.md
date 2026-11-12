@@ -2,7 +2,7 @@
 >
 > **声明:** 本仓库的代码由 LLM(Claude)编写,使用前请自行审阅。
 
-<h1><img src="Resources/AppIcon.png" width="128" height="128" alt="" align="center"> HDR Shield</h1>
+<h1><img src="Resources/AppIcon.png" width="64" height="64" alt="" align="center"> HDR Shield</h1>
 
 [English](#english) | [简体中文](#简体中文)
 
